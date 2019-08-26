@@ -1,0 +1,88 @@
+/**
+ * Toscani custom reset
+ * Expand if needed.
+ *
+ * Resets:
+ * https://github.com/murtaugh/HTML5-Reset/blob/master/assets/css/reset.css
+ * https://github.com/filipelinhares/ress/blob/master/ress.css
+ * https://github.com/jgthms/minireset.css/blob/master/minireset.sass
+ * https://github.com/shankariyerr/tinyreset/blob/master/tinyreset.scss
+ *
+ * Normalizations:
+ * https://github.com/necolas/normalize.css/blob/master/normalize.css
+ * https://github.com/twbs/bootstrap/blob/v4-dev/scss/_reboot.scss
+ * https://github.com/jonathantneal/sanitize.css/blob/master/sanitize.css
+ * https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css
+ */
+
+html, body, body div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, figure, footer, header, menu, nav, section, time, mark, audio, video, details, summary {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    // font-size: 100%;
+    // font-weight: normal;
+    // vertical-align: baseline;
+    // background: transparent;
+}
+
+html {
+    box-sizing: border-box;
+    overflow-y: scroll;
+}
+
+// [canvas=container] {
+    // overflow-y: scroll;
+// }
+body, [canvas=container] {
+    // height: auto;
+    // overflow: visible;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+ol, ul {
+    list-style-type: none;
+    font-size: 0;
+}
+
+input, select {
+    vertical-align: middle;
+}
+
+pre {
+    white-space: pre; /* CSS2 */
+    white-space: pre-wrap; /* CSS 2.1 */
+    white-space: pre-line; /* CSS 3 (and 2.1 as well, actually) */
+    word-wrap: break-word; /* IE */
+}
+
+button, input, select, textarea {
+    margin: 0;
+}
+
+a,
+a:link,
+a:hover,
+a:focus,
+a:active,
+a:visited {
+    outline: 0;
+    text-decoration: none;
+}
+
+// hr {
+//     margin: 0;
+//     border: 0;
+// }
+
+li, a {
+    color: inherit;
+}
+
+img, figure, object, embed, iframe, audio, video {
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+}

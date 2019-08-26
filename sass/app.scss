@@ -1,0 +1,41 @@
+/* pre reset vendor */
+
+// include-media (breakpoints & media queries)
+@import 'include-media/dist/include-media';
+@import 'vendor/_include-media.scss';
+
+/* variables */
+
+@import 'variables/_colors.scss';
+// @import 'variables/_sizes.scss';
+
+/* reset */
+
+@import 'partials/_reset.scss';
+
+/* post reset vendor */
+
+/* mixins */
+
+@import 'mixins/_font-stacks.scss';
+@import 'mixins/_developer-tools.scss';
+@import 'mixins/_mixins.scss';
+@import 'mixins/_container.scss';
+
+/* partials */
+
+// @import 'partials/_buttons.scss';
+// @import 'partials/_pagination.scss';
+// @import 'partials/_share.scss';
+// @import 'partials/_user-content.scss';
+
+/* components */
+
+// @import 'components/_off-canvas.scss';
+// @import 'components/_header.scss';
+// @import 'components/_footer.scss';
+
+body {
+    background-color: #202020;
+    color: #fff;
+}

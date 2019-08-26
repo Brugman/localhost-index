@@ -1,0 +1,23 @@
+.container {
+    @include media( $bp-xs... ) {
+        width: 100%;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    @include media( $bp-sm-up... ) {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    @include media( $bp-sm... ) {
+        width: 540px;
+    }
+    @include media( $bp-md... ) {
+        width: 720px;
+    }
+    @include media( $bp-lg... ) {
+        width: 960px;
+    }
+    @include media( $bp-xl... ) {
+        width: 1140px;
+    }
+}

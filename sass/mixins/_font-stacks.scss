@@ -1,0 +1,16 @@
+/* descriptive stacks */
+
+@mixin font-arial-regular {
+    font-family: Arial, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* functional stacks */
+
+@mixin font-body {
+    @include font-arial-regular;
+}
+@mixin font-title {
+    @include font-arial-regular;
+}

@@ -1,0 +1,6 @@
+assets/css/*.css
+assets/css/*.map
+assets/js/*.js
+assets/js/*.map
+node_modules
+*.sublime-*
