@@ -5,20 +5,17 @@ function remove_files( $items )
     $items = array_diff( $items, [ '.', '..', 'localhost-index' ] );
 
     return array_filter( $items, function( $item ) {
-        global $index_root_dir;
-        return is_dir( $index_root_dir.$item );
+        return is_dir( $item );
     });
 }
 
 function find_type( $item )
 {
-    global $index_root_dir;
-
-    if ( is_file( $index_root_dir.$item.'/public_html/wp-config.php' ) )
+    if ( is_file( $item.'/public_html/wp-config.php' ) )
         return 'wordpress';
-    if ( is_file( $index_root_dir.$item.'/wp-config.php' ) )
+    if ( is_file( $item.'/wp-config.php' ) )
         return 'wordpress';
-    if ( is_file( $index_root_dir.$item.'/artisan' ) )
+    if ( is_file( $item.'/artisan' ) )
         return 'laravel';
 
     return false;
@@ -67,16 +64,16 @@ function add_urls( $items )
 function type_icon( $type )
 {
     if ( $type == 'wordpress' )
-        return include 'assets/images/test/wordpress-simple-brands.svg';
+        return include 'localhost-index/public_html/assets/images/test/wordpress-simple-brands.svg';
     if ( $type == 'laravel' )
-        return include 'assets/images/test/laravel-brands.svg';
+        return include 'localhost-index/public_html/assets/images/test/laravel-brands.svg';
 
-    // return include 'assets/images/test/browser-light.svg';
-    return include 'assets/images/test/code-light.svg';
+    // return include 'localhost-index/public_html/assets/images/test/browser-light.svg';
+    return include 'localhost-index/public_html/assets/images/test/code-light.svg';
 }
 
-// $index_root_dir = '.';
-$index_root_dir = './../../';
+$index_root_dir = '.';
+// $index_root_dir = './../../';
 $items = scandir( $index_root_dir, SCANDIR_SORT_NONE );
 $items = remove_files( $items );
 $items = analyse_dirs( $items );

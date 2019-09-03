@@ -12,7 +12,7 @@
     <title>Localhost</title>
 
     <!-- link css -->
-    <link rel="stylesheet" href="/assets/css/app.min.css">
+    <link rel="stylesheet" href="localhost-index/public_html/assets/css/app.min.css">
 
 </head>
 <body>

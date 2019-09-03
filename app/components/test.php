@@ -18,7 +18,7 @@ foreach ( $items as $item ):
 
     <div class="link frontend">
         <a href="<?=$item['frontend_url'];?>" target="_blank">
-            <?php include 'assets/images/test/browser-light.svg'; ?>
+            <?php include 'localhost-index/public_html/assets/images/test/browser-light.svg'; ?>
         </a>
     </div>
 
