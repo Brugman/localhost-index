@@ -15,8 +15,8 @@ var dir = {
         sass: 'sass',
     },
     output: {
-        js:   'assets/js',
-        sass: 'assets/css',
+        js:   'public_html/assets/js',
+        sass: 'public_html/assets/css',
     },
 };
 

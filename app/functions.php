@@ -5,17 +5,20 @@ function remove_files( $items )
     $items = array_diff( $items, [ '.', '..', 'localhost-index' ] );
 
     return array_filter( $items, function( $item ) {
-        return is_dir( $item );
+        global $index_root_dir;
+        return is_dir( $index_root_dir.$item );
     });
 }
 
 function find_type( $item )
 {
-    if ( is_file( $item.'/public_html/wp-config.php' ) )
+    global $index_root_dir;
+
+    if ( is_file( $index_root_dir.$item.'/public_html/wp-config.php' ) )
         return 'wordpress';
-    if ( is_file( $item.'/wp-config.php' ) )
+    if ( is_file( $index_root_dir.$item.'/wp-config.php' ) )
         return 'wordpress';
-    if ( is_file( $item.'/artisan' ) )
+    if ( is_file( $index_root_dir.$item.'/artisan' ) )
         return 'laravel';
 
     return false;
@@ -61,14 +64,25 @@ function add_urls( $items )
     }, $items );
 }
 
-$items = scandir('.');
+function type_icon( $type )
+{
+    if ( $type == 'wordpress' )
+        return include 'assets/images/test/wordpress-simple-brands.svg';
+    if ( $type == 'laravel' )
+        return include 'assets/images/test/laravel-brands.svg';
+
+    // return include 'assets/images/test/browser-light.svg';
+    return include 'assets/images/test/code-light.svg';
+}
+
+// $index_root_dir = '.';
+$index_root_dir = './../../';
+$items = scandir( $index_root_dir, SCANDIR_SORT_NONE );
 $items = remove_files( $items );
 $items = analyse_dirs( $items );
 $items = add_urls( $items );
 
-
-
-
-echo "<pre style=\"max-height: 800px; z-index: 9999; position: relative; overflow-y: scroll; white-space: pre-wrap; word-wrap: break-word; padding: 10px 15px; border: 1px solid #fff; background-color: #161616; text-align: left; line-height: 1.5; font-family: Courier; font-size: 16px; color: #fff; \">";
-print_r( $items );
-echo "</pre>";
+// echo "<pre style=\"max-height: 800px; z-index: 9999; position: relative; overflow-y: scroll; white-space: pre-wrap; word-wrap: break-word; padding: 10px 15px; border: 1px solid #fff; background-color: #161616; text-align: left; line-height: 1.5; font-family: Courier; font-size: 16px; color: #fff; \">";
+// print_r( $items );
+// echo "</pre>";
+// exit;
