@@ -2,7 +2,7 @@
  * Toscani's Gulp 4 gulpfile template.
  *
  * Template last updated: 2019-02-21.
- * File last updated:     YOURDATE.
+ * File last updated:     2019-08-27.
  */
 
 /**

@@ -1,3 +1,1 @@
-custom font on search form
-favicon
 fancy tooltip on links with link url, on hover and active

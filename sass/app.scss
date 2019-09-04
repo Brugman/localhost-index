@@ -57,7 +57,9 @@ input[type=text] {
     border: 0;
     border-radius: 10px;
     background-color: rgba( #fff, 0.05 );
-    font-size: 22px;
+    text-transform: uppercase;
+    @include font-body;
+    font-size: 20px;
     color: #fff;
     &::placeholder {
         opacity: 0.2;
@@ -75,7 +77,8 @@ li {
     padding-bottom: 20px;
     display: grid;
     @include media( $bp-xs... ) {
-        grid-template-columns: auto auto;
+        grid-template-columns: auto 1fr;
+        grid-gap: 20px 30px;
     }
     @include media( $bp-sm-up... ) {
         grid-template-columns: 36px 36px 1fr;
@@ -104,7 +107,6 @@ li {
         cursor: default;
         @include media( $bp-xs... ) {
             grid-column-end: span 2;
-            padding-top: 20px;
         }
         @include media( $bp-sm-up... ) {
             display: flex;
