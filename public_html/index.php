@@ -1,4 +1,4 @@
 <?php
 
-include 'localhost-index/app/index.php';
+include '../app/index.php';
 

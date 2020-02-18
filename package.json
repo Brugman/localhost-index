@@ -1,17 +1,20 @@
 {
   "name": "localhost-index",
   "version": "0.1.0",
+  "scripts": {
+    "postinstall": "gulp --env=prod"
+  },
   "devDependencies": {
-    "@babel/core": "^7.5.5",
-    "@babel/preset-env": "^7.5.5",
+    "@babel/core": "^7.8.4",
+    "@babel/preset-env": "^7.8.4",
     "gulp": "^4.0.2",
-    "gulp-autoprefixer": "^7.0.0",
-    "gulp-babel": "^8.0.0-beta.2",
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-babel": "^8.0.0",
     "gulp-clean-css": "^4.2.0",
     "gulp-concat": "^2.6.1",
     "gulp-filter": "^6.0.0",
     "gulp-if": "^3.0.0",
-    "gulp-livereload": "^4.0.1",
+    "gulp-livereload": "^4.0.2",
     "gulp-notify": "^3.2.0",
     "gulp-plumber": "^1.2.1",
     "gulp-rename": "^1.4.0",

@@ -1,22 +1,36 @@
 (function($) {
 
-    var filter_list = function () {
-
-        var q = $( this ).val().toLowerCase();
-        if ( q != '' ) {
-            $( '.project' ).filter( function() {
+    var filter_project_list = function () {
+        var query = $( this ).val().toLowerCase();
+        if ( query != '' ) {
+            $('.project').filter( function () {
                 $( this ).toggle(
-                    $( this ).find( '.name' ).text().toLowerCase().indexOf( q ) > -1
+                    $( this ).find('.name').text().toLowerCase().indexOf( query ) > -1
                 );
             });
         } else {
-            $( '.project' ).show();
+            $('.project').show();
         };
-
-        update_count();
     }
 
-    $( '#q' ).on( 'keyup change', filter_list );
-    $( '#q' ).focus().select();
+    /**
+     * On load: Focus search.
+     */
+
+    $('#q').focus().select();
+
+    /**
+     * On query change: Search query.
+     */
+
+    $('#q').on( 'keyup change', filter_project_list );
+
+    /**
+     * On link click: Focus search.
+     */
+
+    $('a').on( 'click mouseup', function ( event ) {
+        $('#q').focus();
+    });
 
 })( jQuery );
