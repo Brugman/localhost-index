@@ -35,7 +35,7 @@
 <?php if ( !empty( $project['git'] ) ): ?>
             <div class="icon git">
                 <a href="<?=$project['git'];?>">
-                    <?php display_icon( 'git-alt-brands' ); ?>
+                    <?php display_git_icon( $project['git'] ); ?>
                 </a>
             </div>
 <?php else: ?>

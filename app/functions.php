@@ -137,3 +137,19 @@ function display_project_type_icon( $type )
     }
 }
 
+function display_git_icon( $git_link )
+{
+    if ( strpos( $git_link, 'github.com' ) !== false )
+    {
+        display_icon( 'github-brands' );
+    }
+    elseif ( strpos( $git_link, 'bitbucket.org' ) !== false )
+    {
+        display_icon( 'bitbucket-brands' );
+    }
+    else
+    {
+        display_icon( 'git-alt-brands' );
+    }
+}
+
