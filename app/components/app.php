@@ -32,15 +32,19 @@
             </div>
 <?php endif; ?>
 
-<?php if ( !empty( $project['git'] ) ): ?>
+<?php if ( is_string( $project['git'] ) ): ?>
             <div class="icon git">
                 <a href="<?=$project['git'];?>">
                     <?php display_git_icon( $project['git'] ); ?>
                 </a>
             </div>
-<?php else: ?>
+<?php elseif ( $project['git'] === true ): ?>
             <div class="icon git nolink">
                 <?php display_icon( 'git-alt-brands' ); ?>
+            </div>
+<?php else: ?>
+            <div class="icon git nolink">
+                <?php display_icon( 'hat-cowboy-light' ); ?>
             </div>
 <?php endif; ?>
 
