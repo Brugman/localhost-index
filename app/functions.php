@@ -25,15 +25,15 @@ function remove_undesired_entries( $items )
     );
 
     return array_filter( $items, function ( $item ) {
-        return is_dir( APP_INDEX_PATH.$item );
+        return is_dir( APP_PROJECTS_PATH.$item );
     });
 }
 
 function analyse_directory_type( $item )
 {
-    if ( is_file( APP_INDEX_PATH.$item.'/public_html/wp-config.php' ) )
+    if ( is_file( APP_PROJECTS_PATH.$item.'/public_html/wp-config.php' ) )
         return 'wordpress';
-    if ( is_file( APP_INDEX_PATH.$item.'/artisan' ) )
+    if ( is_file( APP_PROJECTS_PATH.$item.'/artisan' ) )
         return 'laravel';
 
     return false;
@@ -41,10 +41,10 @@ function analyse_directory_type( $item )
 
 function analyse_directory_git( $item )
 {
-    if ( !is_dir( APP_INDEX_PATH.$item.'/.git' ) )
+    if ( !is_dir( APP_PROJECTS_PATH.$item.'/.git' ) )
         return false;
 
-    $git_config_path = APP_INDEX_PATH.$item.'/.git/config';
+    $git_config_path = APP_PROJECTS_PATH.$item.'/.git/config';
 
     if ( !is_file( $git_config_path ) )
         return true;
@@ -73,23 +73,30 @@ function analyse_directories( $items )
     }, $items );
 }
 
+function lan_ip()
+{
+    return getHostByName( getHostName() );
+}
+
+function ext_for_type( $type = false )
+{
+    if ( $type == 'wordpress' )
+        return APP_EXT_WP;
+    if ( $type == 'laravel' )
+        return APP_EXT_LARAVEL;
+
+    return APP_EXT;
+}
+
 function build_frontend_url( $item, $type = false )
 {
-    $lan_ip = getHostByName( getHostName() );
-
-    $ext = 'dev';
-    if ( $type == 'laravel' )
-        $ext = 'lar';
-
-    return 'http://'.$item.'.'.$ext.'.'.$lan_ip.'.nip.io';
+    return 'http://'.$item.ext_for_type( $type ).'.'.lan_ip().APP_WILDCARD_DNS_TLD;
 }
 
 function build_backend_url( $item, $type = false )
 {
-    $lan_ip = getHostByName( getHostName() );
-
     if ( $type == 'wordpress' )
-        return 'http://'.$item.'.dev.'.$lan_ip.'.nip.io/wp-login.php';
+        return 'http://'.$item.ext_for_type( $type ).'.'.lan_ip().APP_WILDCARD_DNS_TLD.'/wp-login.php';
 
     return false;
 }
@@ -105,7 +112,7 @@ function append_project_urls( $items )
 
 function get_projects()
 {
-    $projects = scandir( APP_INDEX_PATH, SCANDIR_SORT_NONE );
+    $projects = scandir( APP_PROJECTS_PATH, SCANDIR_SORT_NONE );
     $projects = remove_undesired_entries( $projects );
     $projects = analyse_directories( $projects );
     $projects = append_project_urls( $projects );
