@@ -1,12 +1,12 @@
 <div class="container">
 
-<?php if ( !empty( $projects = get_projects() ) ): ?>
-
     <div class="search-bar">
 
         <input type="text" id="q" autocomplete="off" placeholder="Search">
 
     </div>
+
+<?php if ( !empty( $projects = get_projects() ) ): ?>
 
     <ul class="projects">
 
