@@ -20,7 +20,7 @@
                 </a>
             </div>
 
-<?php if ( !empty( $project['backend_url'] ) ): ?>
+<?php if ( $project['backend_url'] ): ?>
             <div class="icon backend">
                 <a href="<?=$project['backend_url'];?>">
                     <?php display_project_type_icon( $project['type'] ); ?>
