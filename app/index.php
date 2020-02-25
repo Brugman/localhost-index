@@ -3,6 +3,6 @@
 include 'config.php';
 include 'functions.php';
 include 'core-head.php';
-include 'ui.php';
+include 'view.php';
 include 'core-foot.php';
 
