@@ -2,7 +2,7 @@
  * Toscani's Gulp 4 gulpfile template.
  *
  * Template last updated: 2019-02-21.
- * File last updated:     2019-08-27.
+ * File last updated:     2019-12-17.
  */
 
 /**
@@ -22,8 +22,6 @@ var dir = {
 
 /**
  * Packages.
- *
- * Install command: npm i --save-dev gulp gulp-autoprefixer gulp-clean-css gulp-concat gulp-filter gulp-if gulp-livereload gulp-notify gulp-plumber gulp-rename gulp-sass gulp-sass-glob gulp-sourcemaps gulp-uglify gulp-util gulp-babel@next @babel/core @babel/preset-env
  */
 var gulp         = require( 'gulp' );
 var autoprefixer = require( 'gulp-autoprefixer' );
@@ -39,34 +37,30 @@ var sass         = require( 'gulp-sass' );
 var sassglob     = require( 'gulp-sass-glob' );
 var sourcemaps   = require( 'gulp-sourcemaps' );
 var uglify       = require( 'gulp-uglify' );
-var util         = require( 'gulp-util' );
 var babel        = require( 'gulp-babel' );
+var argv         = require( 'minimist' )( process.argv.slice( 2 ) );
 
 /**
  * Environment.
  */
-var env = ( util.env.env ? util.env.env : 'dev' );
+var env = ( argv.env ? argv.env : 'dev' );
 
 /**
  * Config.
  */
 var config = {
-    run_js_sourcemaps:     ( env == 'dev' ? true : false ),
-    run_sass_sourcemaps:   ( env == 'dev' ? true : false ),
-    run_js_minification:   ( env == 'dev' ? false : true ),
-    run_sass_minification: ( env == 'dev' ? false : true ),
+    run_sourcemaps:   ( env == 'dev' ? true : false ),
+    run_minification: ( env == 'dev' ? false : true ),
 };
 
 /**
  * Feedback.
  */
 console.log( '' );
-console.log( 'Environment:      '+( env == 'dev' ? 'Development' : 'Production' ) );
+console.log( 'Environment:  '+( env == 'dev' ? 'Development' : 'Production' ) );
 console.log( '' );
-console.log( 'JS sourcemaps:    '+( config.run_js_sourcemaps ? 'Yes' : 'No' ) );
-console.log( 'CSS sourcemaps:   '+( config.run_sass_sourcemaps ? 'Yes' : 'No' ) );
-console.log( 'JS minification:  '+( config.run_js_minification ? 'Yes' : 'No' ) );
-console.log( 'CSS minification: '+( config.run_sass_minification ? 'Yes' : 'No' ) );
+console.log( 'Sourcemaps:   '+( config.run_sourcemaps ? 'Yes' : 'No' ) );
+console.log( 'Minification: '+( config.run_minification ? 'Yes' : 'No' ) );
 console.log( '' );
 
 /**
@@ -83,19 +77,19 @@ app.processJS = function ( args ) {
             message: '<%= error.type %> error on line <%= error.line %>\n\n<%= error.filename %>',
         } ) } ) )
         // start the sourcemap
-        .pipe( gulpif( config.run_js_sourcemaps, sourcemaps.init() ) )
+        .pipe( gulpif( config.run_sourcemaps, sourcemaps.init() ) )
         // compile
         .pipe( babel( { presets: ['@babel/env'] } ) )
         // concat the js
         .pipe( concat( args.outputFile ) )
         // minify the js
-        .pipe( gulpif( config.run_js_minification, uglify() ) )
+        .pipe( gulpif( config.run_minification, uglify() ) )
         // finish the sourcemap
-        .pipe( gulpif( config.run_js_sourcemaps, sourcemaps.write( '.' ) ) )
+        .pipe( gulpif( config.run_sourcemaps, sourcemaps.write( '.' ) ) )
         // place the output file
         .pipe( gulp.dest( args.outputDir ) )
         // remove the sourcemap from the stream
-        .pipe( gulpif( config.run_js_sourcemaps, filter( [ '**/*.js' ] ) ) )
+        .pipe( gulpif( config.run_sourcemaps, filter( [ '**/*.js' ] ) ) )
         // reload the site
         .pipe( livereload() );
 };
@@ -109,7 +103,7 @@ app.processSass = function ( args ) {
             message: '<%= error.messageOriginal %>\n\n<%= error.relativePath %>\n\nLine <%= error.line %>, column <%= error.column %>.',
         } ) } ) )
         // start the sourcemap
-        .pipe( gulpif( config.run_sass_sourcemaps, sourcemaps.init() ) )
+        .pipe( gulpif( config.run_sourcemaps, sourcemaps.init() ) )
         // analyse the globs
         .pipe( sassglob() )
         // compile the sass to css
@@ -117,15 +111,15 @@ app.processSass = function ( args ) {
         // autoprefix the css
         .pipe( autoprefixer( 'last 10 versions' ) )
         // minify the css
-        .pipe( gulpif( config.run_sass_minification, cleancss( { keepSpecialComments: 0 } ) ) )
+        .pipe( gulpif( config.run_minification, cleancss( { keepSpecialComments: 0 } ) ) )
         // name the output file
         .pipe( rename( args.outputFile ) )
         // finish the sourcemap
-        .pipe( gulpif( config.run_sass_sourcemaps, sourcemaps.write( '.' ) ) )
+        .pipe( gulpif( config.run_sourcemaps, sourcemaps.write( '.' ) ) )
         // place the output file
         .pipe( gulp.dest( args.outputDir ) )
         // remove the sourcemap from the stream
-        .pipe( gulpif( config.run_sass_sourcemaps, filter( [ '**/*.css' ] ) ) )
+        .pipe( gulpif( config.run_sourcemaps, filter( [ '**/*.css' ] ) ) )
         // reload the site
         .pipe( livereload() );
 };
@@ -187,3 +181,4 @@ gulp.task( 'default', gulp.parallel(
     'js_app',
     'sass_app'
 ));
+
