@@ -75,7 +75,7 @@ function analyse_directories( $items )
 
 function lan_ip()
 {
-    return getHostByName( getHostName() );
+    return APP_IP_OVERRIDE ?: getHostByName( getHostName() );
 }
 
 function ext_for_type( $type = false )
