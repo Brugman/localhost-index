@@ -1,5 +1,9 @@
 (function($) {
 
+    /**
+     * Functions.
+     */
+
     var filter_project_list = function () {
         var query = $( this ).val().toLowerCase();
         if ( query != '' ) {
