@@ -51,10 +51,17 @@ function analyse_directory_git( $item )
 
     $git_config = file_get_contents( $git_config_path );
 
-    preg_match( '/(bitbucket\.org.+).git/', $git_config, $bitbucket_url );
+    // https://user@bitbucket.org/owner/project.git
+    preg_match( '/(bitbucket\.org\/.+).git/', $git_config, $bitbucket_url );
     if ( isset( $bitbucket_url[1] ) )
         return 'https://'.$bitbucket_url[1];
 
+    // git@bitbucket.org:owner/project.git
+    preg_match( '/(bitbucket\.org:.+).git/', $git_config, $bitbucket_url );
+    if ( isset( $bitbucket_url[1] ) )
+        return 'https://'.str_replace( ':', '/', $bitbucket_url[1] );
+
+    // https://github.com/owner/project.git
     preg_match( '/(github\.com.+).git/', $git_config, $github_url );
     if ( isset( $github_url[1] ) )
         return 'https://'.$github_url[1];
