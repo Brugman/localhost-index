@@ -18,6 +18,12 @@
     }
 
     /**
+     * On load: Fade in.
+     */
+
+    $('#app').fadeIn();
+
+    /**
      * On load: Focus search.
      */
 
