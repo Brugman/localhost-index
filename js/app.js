@@ -47,31 +47,6 @@
      * Detect changes in the project dir.
      */
 
-    function notify_new_projects( projects ) {
-
-        if ( projects.length == 0 )
-            return;
-
-        projects.forEach( function ( project ) {
-            $('.notifications .list').append('<li>'+project+'</li>');
-        });
-
-        $('.notifications').fadeIn();
-    }
-
-    function remove_projects( removeList ) {
-
-        if ( removeList.length == 0 )
-            return;
-
-        $('.project').each( function () {
-            if ( $.inArray( $( this ).find('.name').text(), removeList ) != -1 ) {
-                $( this ).find('.name').css('color','#c0392b');
-                $( this ).delay(2500).slideUp();
-            }
-        });
-    }
-
     var projects_old = false;
 
     setInterval( function () {
@@ -82,8 +57,9 @@
                     let removed = $( projects_old ).not( projects_new ).get();
                     let added = $( projects_new ).not( projects_old ).get();
 
-                    notify_new_projects( added );
-                    remove_projects( removed );
+                    if ( added.length != 0 || removed.length != 0 ) {
+                        location.reload();
+                    }
                 }
                 projects_old = projects_new;
             }
