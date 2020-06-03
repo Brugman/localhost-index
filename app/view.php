@@ -64,3 +64,11 @@
 
 </div><!-- container -->
 
+<div class="notifications">
+    <div class="added">
+        <p>New projects found:</p>
+        <ul class="list"></ul>
+        <p><a href="/">Reload app?</a></p>
+    </div><!-- added -->
+</div><!-- notifications -->
+

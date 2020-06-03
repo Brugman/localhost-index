@@ -127,6 +127,14 @@ function get_projects()
     return $projects;
 }
 
+function get_projects_basic()
+{
+    $projects = scandir( APP_PROJECTS_PATH, SCANDIR_SORT_NONE );
+    $projects = remove_undesired_entries( $projects );
+
+    return $projects;
+}
+
 function display_icon( $icon )
 {
     $path = '../public_html/assets/images/'.$icon.'.svg';
