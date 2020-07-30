@@ -34,5 +34,5 @@ define( 'APP_EXT_LARAVEL', '.lar' );
  * Options: 192.168.x.x, 10.10.x.x
  */
 
-define( 'APP_IP_OVERRIDE', false );
+define( 'APP_IP_OVERRIDE', '192.168.5.220' );
 
