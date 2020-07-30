@@ -1,7 +1,7 @@
 <?php
 
-if ( !file_exists('config.php') )
-    copy('config-example.php', 'config.php');
+if ( !file_exists( dirname(__FILE__).'/config.php') )
+    copy( dirname(__FILE__).'/config-example.php', dirname(__FILE__).'/config.php' );
 
 include 'config.php';
 include 'functions.php';
