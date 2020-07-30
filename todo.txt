@@ -1,2 +1,0 @@
-fancy tooltip on links with link url, on hover and active
-avoid FOUT
