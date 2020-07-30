@@ -19,7 +19,7 @@ define( 'APP_WILDCARD_DNS_TLD', '.nip.io' );
 /**
  * Extensions.
  * Every extension should be mapped to a specific web root.
- * Example: http://project.[Extension].10.10.10.11.nip.io
+ * Example: http://project.[EXT].10.10.10.11.nip.io
  */
 
 define( 'APP_EXT', '.dev' );
