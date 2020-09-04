@@ -11,6 +11,10 @@ body {
         padding-bottom: 200px;
     }
 }
+::selection {
+    background-color: $color-highlight;
+    color: #202020;
+}
 #app {
     display: none;
 }
