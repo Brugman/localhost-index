@@ -9,7 +9,7 @@
     <meta name="robots" content="noindex, nofollow">
 
     <!-- title -->
-    <title>&nbsp;</title>
+    <title>localhost</title>
 
     <!-- link css -->
     <link rel="stylesheet" href="/assets/css/app.min.css">
