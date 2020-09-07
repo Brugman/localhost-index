@@ -1,6 +1,12 @@
 {
   "name": "localhost-index",
   "version": "1.0.0",
+  "description": "A better UI for your localhost.",
+  "homepage": "https://github.com/Brugman/localhost-index",
+  "license": "MIT",
+  "author": "Tim Brugman (https://timbr.dev/)",
+  "repository": "github:Brugman/localhost-index",
+  "private": "true",
   "scripts": {
     "postinstall": "npx gulp --env=prod"
   },
