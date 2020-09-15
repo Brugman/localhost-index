@@ -1,6 +1,6 @@
 # Localhost Index
 
-Localhost Index is a replacement "index.php" for XAMPP / WampServer / Laragon users. It is meant for PHP and JavaScript developers, who work on multiple projects at a time, such as WordPress websites and Laravel apps.
+> Localhost Index is a replacement "index.php" for XAMPP / WampServer / Laragon users. It is meant for PHP and JavaScript developers, who work on multiple projects at a time, such as WordPress websites and Laravel apps.
 
 ![screenshot](/screenshot.png)
 
@@ -43,17 +43,20 @@ fuckyeah.gif
 1. Redirect your `localhost` and `[IP].nip.io` to the mapped URL.
 1. Bookmark your new localhost index or set it as your homepage.
 
-## Development
-
-To build the CSS & JS.
-
-1. `npm i`
-1. `npx gulp --env=prod` (repeat)
-
 ## Contributing
 
-If there's anything you'd like to see added or changed, please open an issue so we can talk about it. Forking is cool too.
+Found a bug? Anything you would like to ask, add or change? Please open an issue so we can talk about it.
 
-## License
+Pull requests are welcome. Please try to match the current code formatting.
 
-[MIT](/LICENSE) &copy; [Tim Brugman](https://timbr.dev/)
+### Development installation
+
+1. `npm i`
+
+### Build tools
+
+1. `gulp --env=prod` (repeat)
+
+## Author
+
+[Tim Brugman](https://github.com/Brugman)
