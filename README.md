@@ -1,6 +1,6 @@
 # Localhost Index
 
-> Localhost Index is a replacement "index.php" for XAMPP / WampServer / Laragon users. It is meant for PHP and JavaScript developers, who work on multiple projects at a time, such as WordPress websites and Laravel apps.
+> Localhost Index is a replacement "index.php" for Laragon / WampServer / XAMPP users.
 
 ![screenshot](/screenshot.png)
 
@@ -32,7 +32,7 @@ But you also:
 - Can visit your local sites from anywhere on your LAN.
 - Can visit your co-workers sites from anywhere on the office LAN.
 
-fuckyeah.gif
+![fuck yeah](https://i.imgur.com/Xb8yDSd.jpg)
 
 ## Installation
 
