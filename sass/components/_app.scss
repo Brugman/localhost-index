@@ -90,6 +90,7 @@ input[type=text] {
         letter-spacing: 2px;
         font-size: 18px;
         cursor: default;
+        word-break: break-word;
         @include media( $bp-xs... ) {
             grid-column: 1 / -1;
         }
