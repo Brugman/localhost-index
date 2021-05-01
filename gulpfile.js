@@ -1,8 +1,8 @@
 /**
  * Toscani's Gulp 4 gulpfile template.
  *
- * Template last updated: 2019-02-21.
- * File last updated:     2019-12-17.
+ * Template last updated: 2020-12-24.
+ * File last updated:     2021-05-01.
  */
 
 /**
@@ -12,11 +12,11 @@ var dir = {
     php: 'app',
     input: {
         js:   'js',
-        sass: 'sass',
+        less: 'less',
     },
     output: {
         js:   'public_html/assets/js',
-        sass: 'public_html/assets/css',
+        less: 'public_html/assets/css',
     },
 };
 
@@ -26,19 +26,20 @@ var dir = {
 var gulp         = require( 'gulp' );
 var autoprefixer = require( 'gulp-autoprefixer' );
 var cleancss     = require( 'gulp-clean-css' );
-var concat       = require( 'gulp-concat' );
 var filter       = require( 'gulp-filter' );
 var gulpif       = require( 'gulp-if' );
 var livereload   = require( 'gulp-livereload' );
 var notify       = require( 'gulp-notify' );
 var plumber      = require( 'gulp-plumber' );
 var rename       = require( 'gulp-rename' );
-var sass         = require( 'gulp-sass' );
-var sassglob     = require( 'gulp-sass-glob' );
 var sourcemaps   = require( 'gulp-sourcemaps' );
+var argv         = require( 'minimist' )( process.argv.slice( 2 ) );
+// js
+var concat       = require( 'gulp-concat' );
 var uglify       = require( 'gulp-uglify' );
 var babel        = require( 'gulp-babel' );
-var argv         = require( 'minimist' )( process.argv.slice( 2 ) );
+// less
+var less         = require( 'gulp-less' );
 
 /**
  * Environment.
@@ -64,6 +65,20 @@ console.log( 'Minification: '+( config.run_minification ? 'Yes' : 'No' ) );
 console.log( '' );
 
 /**
+ * Plumber notification.
+ */
+var onError = function ( error ) {
+
+    notify.onError({
+        title: "Error in "+error.filename.replace( /^.*[\\\/]/, '' )+" on line "+error.line,
+        message: "-\n"+error.extract,
+        appID: "Gulp",
+    })( error );
+
+    this.emit('end');
+};
+
+/**
  * Procedures.
  */
 var app = [];
@@ -72,10 +87,7 @@ app.processJS = function ( args ) {
     // use all the files
     return gulp.src( args.inputFiles )
         // catch errors
-        .pipe( plumber( { errorHandler: notify.onError( {
-            title: args.name,
-            message: '<%= error.type %> error on line <%= error.line %>\n\n<%= error.filename %>',
-        } ) } ) )
+        .pipe( plumber( { errorHandler: onError } ) )
         // start the sourcemap
         .pipe( gulpif( config.run_sourcemaps, sourcemaps.init() ) )
         // compile
@@ -90,24 +102,25 @@ app.processJS = function ( args ) {
         .pipe( gulp.dest( args.outputDir ) )
         // remove the sourcemap from the stream
         .pipe( gulpif( config.run_sourcemaps, filter( [ '**/*.js' ] ) ) )
+        // notify
+        .pipe( notify({
+            title: "Processed",
+            message: args.name,
+            appID: "Gulp",
+        }))
         // reload the site
         .pipe( livereload() );
 };
 
-app.processSass = function ( args ) {
+app.processLess = function ( args ) {
     // use all the files
     return gulp.src( args.inputFiles )
         // catch errors
-        .pipe( plumber( { errorHandler: notify.onError( {
-            title: 'Error in ' + args.name,
-            message: '<%= error.messageOriginal %>\n\n<%= error.relativePath %>\n\nLine <%= error.line %>, column <%= error.column %>.',
-        } ) } ) )
+        .pipe( plumber( { errorHandler: onError } ) )
         // start the sourcemap
         .pipe( gulpif( config.run_sourcemaps, sourcemaps.init() ) )
-        // analyse the globs
-        .pipe( sassglob() )
-        // compile the sass to css
-        .pipe( sass( { includePaths: ['node_modules'] } ) )
+        // compile the less to css
+        .pipe( less() )
         // autoprefix the css
         .pipe( autoprefixer( 'last 10 versions' ) )
         // minify the css
@@ -120,6 +133,12 @@ app.processSass = function ( args ) {
         .pipe( gulp.dest( args.outputDir ) )
         // remove the sourcemap from the stream
         .pipe( gulpif( config.run_sourcemaps, filter( [ '**/*.css' ] ) ) )
+        // notify
+        .pipe( notify({
+            title: "Processed",
+            message: args.name,
+            appID: "Gulp",
+        }))
         // reload the site
         .pipe( livereload() );
 };
@@ -138,13 +157,13 @@ gulp.task( 'js_app', function ( done ) {
 });
 
 /**
- * Tasks: Sass.
+ * Tasks: Less.
  */
-gulp.task( 'sass_app', function ( done ) {
-    app.processSass({
-        'name'       : 'app sass',
-        'inputFiles' : [ dir.input.sass+'/app.scss' ],
-        'outputDir'  : dir.output.sass,
+gulp.task( 'less_app', function ( done ) {
+    app.processLess({
+        'name'       : 'app less',
+        'inputFiles' : [ dir.input.less+'/app.less' ],
+        'outputDir'  : dir.output.less,
         'outputFile' : 'app.min.css',
     });
     done();
@@ -166,12 +185,16 @@ gulp.task( 'watch', function () {
     livereload.listen();
     // JavaScript
     gulp.watch( dir.input.js+'/app.js', gulp.parallel( 'js_app' ) );
-    // Sass
-    gulp.watch( dir.input.sass+'/**/*.scss', gulp.parallel( 'sass_app' ) );
+    // Less
+    gulp.watch( dir.input.less+'/**/*.less', gulp.parallel( 'less_app' ) );
     // PHP
     gulp.watch( dir.php+'/**/*.php', gulp.parallel( 'livereload' ) );
     // notify
-    gulp.src( 'node_modules/gulp-notify/test/fixtures/1.txt' ).pipe( notify( 'Gulp is watching.' ) );
+    gulp.src( 'node_modules/gulp-notify/test/fixtures/1.txt' ).pipe( notify({
+        title: "Gulp watch is ready.",
+        message: " ",
+        appID: "Gulp",
+    }));
 });
 
 /**
@@ -179,6 +202,6 @@ gulp.task( 'watch', function () {
  */
 gulp.task( 'default', gulp.parallel(
     'js_app',
-    'sass_app'
+    'less_app'
 ));
 
