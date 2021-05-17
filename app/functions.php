@@ -103,7 +103,7 @@ function build_frontend_url( $item, $type = false )
 function build_backend_url( $item, $type = false )
 {
     if ( $type == 'wordpress' )
-        return 'http://'.$item.ext_for_type( $type ).'.'.lan_ip().APP_WILDCARD_DNS_TLD.'/wp-login.php';
+        return 'http://'.$item.ext_for_type( $type ).'.'.lan_ip().APP_WILDCARD_DNS_TLD.'/wp-admin/';
 
     return false;
 }
