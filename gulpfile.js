@@ -1,8 +1,8 @@
 /**
- * Toscani's Gulp 4 gulpfile template.
+ * timbr.dev Gulp template.
  *
- * Template last updated: 2020-12-24.
- * File last updated:     2021-05-01.
+ * Template last updated: 2021-06-17.
+ * File last updated:     2021-06-17.
  */
 
 /**
@@ -34,6 +34,7 @@ var plumber      = require( 'gulp-plumber' );
 var rename       = require( 'gulp-rename' );
 var sourcemaps   = require( 'gulp-sourcemaps' );
 var argv         = require( 'minimist' )( process.argv.slice( 2 ) );
+var log          = require( 'fancy-log' );
 // js
 var concat       = require( 'gulp-concat' );
 var uglify       = require( 'gulp-uglify' );
@@ -60,20 +61,41 @@ var config = {
 console.log( '' );
 console.log( 'Environment:  '+( env == 'dev' ? 'Development' : 'Production' ) );
 console.log( '' );
-console.log( 'Sourcemaps:   '+( config.run_sourcemaps ? 'Yes' : 'No' ) );
+console.log( 'Sourcemaps:   '+( config.run_sourcemaps   ? 'Yes' : 'No' ) );
 console.log( 'Minification: '+( config.run_minification ? 'Yes' : 'No' ) );
 console.log( '' );
 
 /**
- * Plumber notification.
+ * Error handlers.
  */
-var onError = function ( error ) {
+var onErrorJS = function ( err ) {
+    log( '----------------' );
+    log( 'JS has an error!' );
+    log( '----------------' );
 
     notify.onError({
-        title: "Error in "+error.filename.replace( /^.*[\\\/]/, '' )+" on line "+error.line,
-        message: "-\n"+error.extract,
+        title: "Error in "+err.fileName.replace( /^.*[\\\/]/, '' )+" on line "+err.loc.line,
+        message: err.code+"\n"+err.reasonCode,
         appID: "Gulp",
-    })( error );
+    })( err );
+
+    log( '----------------' );
+
+    this.emit('end');
+};
+
+var onErrorLess = function ( err ) {
+    log( '------------------' );
+    log( 'Less has an error!' );
+    log( '------------------' );
+
+    notify.onError({
+        title: "Error in "+err.filename.replace( /^.*[\\\/]/, '' )+" on line "+err.line,
+        message: err.extract,
+        appID: "Gulp",
+    })( err );
+
+    log( '------------------' );
 
     this.emit('end');
 };
@@ -87,7 +109,7 @@ app.processJS = function ( args ) {
     // use all the files
     return gulp.src( args.inputFiles )
         // catch errors
-        .pipe( plumber( { errorHandler: onError } ) )
+        .pipe( plumber( { errorHandler: onErrorJS } ) )
         // start the sourcemap
         .pipe( gulpif( config.run_sourcemaps, sourcemaps.init() ) )
         // compile
@@ -102,12 +124,6 @@ app.processJS = function ( args ) {
         .pipe( gulp.dest( args.outputDir ) )
         // remove the sourcemap from the stream
         .pipe( gulpif( config.run_sourcemaps, filter( [ '**/*.js' ] ) ) )
-        // notify
-        .pipe( notify({
-            title: "Processed",
-            message: args.name,
-            appID: "Gulp",
-        }))
         // reload the site
         .pipe( livereload() );
 };
@@ -116,13 +132,13 @@ app.processLess = function ( args ) {
     // use all the files
     return gulp.src( args.inputFiles )
         // catch errors
-        .pipe( plumber( { errorHandler: onError } ) )
+        .pipe( plumber( { errorHandler: onErrorLess } ) )
         // start the sourcemap
         .pipe( gulpif( config.run_sourcemaps, sourcemaps.init() ) )
         // compile the less to css
         .pipe( less() )
         // autoprefix the css
-        .pipe( autoprefixer( 'last 10 versions' ) )
+        .pipe( autoprefixer() )
         // minify the css
         .pipe( gulpif( config.run_minification, cleancss( { keepSpecialComments: 0 } ) ) )
         // name the output file
@@ -133,12 +149,6 @@ app.processLess = function ( args ) {
         .pipe( gulp.dest( args.outputDir ) )
         // remove the sourcemap from the stream
         .pipe( gulpif( config.run_sourcemaps, filter( [ '**/*.css' ] ) ) )
-        // notify
-        .pipe( notify({
-            title: "Processed",
-            message: args.name,
-            appID: "Gulp",
-        }))
         // reload the site
         .pipe( livereload() );
 };
