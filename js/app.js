@@ -66,4 +66,14 @@
         );
     }, 5000 );
 
+    /**
+     * Filter by URL (/?q=example).
+     */
+
+    let searchParams = new URLSearchParams( window.location.search );
+
+    if ( searchParams.has('q') ) {
+        $('#q').val( searchParams.get('q') ).change();
+    }
+
 })( jQuery );
