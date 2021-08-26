@@ -36,3 +36,11 @@ define( 'APP_EXT_LARAVEL', '.lar' );
 
 define( 'APP_IP_OVERRIDE', false );
 
+/**
+ * Ignore projects.
+ * What projects should not be listed?
+ * Example: ['adminer', 'phpmyadmin']
+ */
+
+define( 'APP_IGNORE_PROJECTS', [] );
+

@@ -24,6 +24,8 @@ function remove_undesired_entries( $items )
         ]
     );
 
+    $items = array_diff( $items, APP_IGNORE_PROJECTS );
+
     return array_filter( $items, function ( $item ) {
         return is_dir( APP_PROJECTS_PATH.$item );
     });
