@@ -82,15 +82,23 @@ function analyse_directories( $items )
     }, $items );
 }
 
+function scheme()
+{
+    if ( defined('APP_SSL') && APP_SSL )
+        return 'https://';
+
+    return 'http://';
+}
+
 function build_frontend_url( $item, $type = false )
 {
-    return 'http://'.$item.'.'.APP_TLD;
+    return scheme().$item.'.'.APP_TLD;
 }
 
 function build_backend_url( $item, $type = false )
 {
     if ( $type == 'wordpress' )
-        return 'http://'.$item.'.'.APP_TLD.'/wp-admin/';
+        return scheme().$item.'.'.APP_TLD.'/wp-admin/';
 
     return false;
 }

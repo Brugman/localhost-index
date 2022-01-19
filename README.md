@@ -17,6 +17,7 @@ Your settings can be found in `app/config.php`.
 
 - You can set a different TLD than `test`.
 - You can exclude folders from the project list.
+- You can enable SSL/HTTPS for your project links.
 
 ## Contributing
 

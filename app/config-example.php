@@ -23,3 +23,11 @@ define( 'APP_TLD', 'test' );
 
 define( 'APP_IGNORE_PROJECTS', [] );
 
+/**
+ * SSL.
+ * Do your projects have SSL?
+ * Example: false | true
+ */
+
+define( 'APP_SSL', false );
+
