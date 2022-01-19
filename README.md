@@ -9,7 +9,7 @@
 Make sure the `project-name.test -> /webdev/project-name/public_html/` local dev format is working first.
 
 1. Map `localhost-index.test` to the project `public_html` dir.
-1. Redirect `localhost` to `localhost-index.test`. You'll find example code in `redirect-example.php`.
+1. Redirect `localhost` to `localhost-index.test`. ([example code](/redirect-example.php)).
 
 ## Configuration
 
