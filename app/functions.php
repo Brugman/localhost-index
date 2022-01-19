@@ -82,30 +82,15 @@ function analyse_directories( $items )
     }, $items );
 }
 
-function lan_ip()
-{
-    return APP_IP_OVERRIDE ?: getHostByName( getHostName() );
-}
-
-function ext_for_type( $type = false )
-{
-    if ( $type == 'wordpress' )
-        return APP_EXT_WP;
-    if ( $type == 'laravel' )
-        return APP_EXT_LARAVEL;
-
-    return APP_EXT;
-}
-
 function build_frontend_url( $item, $type = false )
 {
-    return 'http://'.$item.ext_for_type( $type ).'.'.lan_ip().APP_WILDCARD_DNS_TLD;
+    return 'http://'.$item.'.'.APP_TLD;
 }
 
 function build_backend_url( $item, $type = false )
 {
     if ( $type == 'wordpress' )
-        return 'http://'.$item.ext_for_type( $type ).'.'.lan_ip().APP_WILDCARD_DNS_TLD.'/wp-admin/';
+        return 'http://'.$item.'.'.APP_TLD.'/wp-admin/';
 
     return false;
 }
