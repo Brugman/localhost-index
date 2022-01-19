@@ -19,6 +19,12 @@ Your settings can be found in `app/config.php`.
 - You can exclude folders from the project list.
 - You can enable SSL/HTTPS for your project links.
 
+## Branches
+
+The `develop` branch is built for local development with URLs that look like `project-name.test`.
+
+The `nip.io` branch is built for local development with URLs that look like `project-name.dev.10.10.10.56.nip.io`.
+
 ## Contributing
 
 Found a bug? Anything you would like to ask, add or change? Please open an issue so we can talk about it.
