@@ -20,7 +20,7 @@ If you create a lot of new websites, creating new (sub)domains for each new proj
 
 If you work in an office and want to show your co-workers your local website, they can't access `project-a.dev`, that requires mapping on their OS. What does work is your LAN IP, like `192.168.0.56`, or `10.10.10.56`, if you open up your Apache to LAN visitors. You only have 1 IP, and many sites though, so we need a way to pass along that you want to visit `project-a`.
 
-Enter Wildcard DNS services [xip](http://xip.io/) and [nip](https://nip.io/). They do the same. xip is the OG, nip says it is smarter. If one has downtime, use the other. If you visit `10.10.10.56.xip.io`, they make you load `10.10.10.56`. But if visit `project-a.dev.10.10.10.56.xip.io`, they make you load `10.10.10.56`, but your Apache on the receiving end, can detect that the URL is `project-a.dev.10.10.10.56.xip.io`. From there your vhost can extract the `project-a.dev` part, and load the website in `/webdev/project-a/public_html/`
+Enter Wildcard DNS services [nip](https://nip.io/) and [sslip](https://sslip.io/). They do the same. If you visit `10.10.10.56.nip.io`, they make you load `10.10.10.56`. But if visit `project-a.dev.10.10.10.56.nip.io`, they make you load `10.10.10.56`, but your Apache on the receiving end, can detect that the URL is `project-a.dev.10.10.10.56.nip.io`. From there your vhost can extract the `project-a.dev` part, and load the website in `/webdev/project-a/public_html/`
 
 Yes, your local websites now have crazy long weird URLs.
 
