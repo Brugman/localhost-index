@@ -6,15 +6,17 @@
 
 ## Installation
 
-1. Get the `project-name.test` local dev format working.
+Make sure the `project-name.test -> /webdev/project-name/public_html/` local dev format is working first.
+
 1. Map `localhost-index.test` to the project `public_html` dir.
-1. Visit `localhost-index.test`.
+1. Redirect `localhost` to `localhost-index.test`. You'll find example code in `redirect-example.php`.
 
 ## Configuration
 
-Are things not working? Try editing `app/config.php`.
+Your settings can be found in `app/config.php`.
 
-Like your new index? Redirect your `localhost` to your new index. You'll find an example in `redirect-example.php`.
+- You can set a different TLD than `test`.
+- You can exclude folders from the project list.
 
 ## Contributing
 
