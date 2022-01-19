@@ -43,6 +43,12 @@ But you also:
 1. Redirect your `localhost` and `[IP].nip.io` to the mapped URL.
 1. Bookmark your new localhost index or set it as your homepage.
 
+## Branches
+
+The `develop` branch is built for local development with URLs that look like `project-name.test`.
+
+The `nip.io` branch is built for local development with URLs that look like `project-name.dev.10.10.10.56.nip.io`.
+
 ## Contributing
 
 Found a bug? Anything you would like to ask, add or change? Please open an issue so we can talk about it.
@@ -55,7 +61,7 @@ Pull requests are welcome. Please try to match the current code formatting.
 
 ### Build tools
 
-1. `gulp --env=prod` (repeat)
+1. `npx gulp --env=prod` (repeat)
 
 ## Author
 
