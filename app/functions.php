@@ -87,6 +87,14 @@ function lan_ip()
     return APP_IP_OVERRIDE ?: getHostByName( getHostName() );
 }
 
+function scheme()
+{
+    if ( defined('APP_SSL') && APP_SSL )
+        return 'https://';
+
+    return 'http://';
+}
+
 function ext_for_type( $type = false )
 {
     if ( $type == 'wordpress' )
@@ -99,13 +107,13 @@ function ext_for_type( $type = false )
 
 function build_frontend_url( $item, $type = false )
 {
-    return 'http://'.$item.ext_for_type( $type ).'.'.lan_ip().APP_WILDCARD_DNS_TLD;
+    return scheme().$item.'.'.ext_for_type( $type ).'.'.lan_ip().'.'.APP_WILDCARD_DNS_TLD;
 }
 
 function build_backend_url( $item, $type = false )
 {
     if ( $type == 'wordpress' )
-        return 'http://'.$item.ext_for_type( $type ).'.'.lan_ip().APP_WILDCARD_DNS_TLD.'/wp-admin/';
+        return scheme().$item.'.'.ext_for_type( $type ).'.'.lan_ip().'.'.APP_WILDCARD_DNS_TLD.'/wp-admin/';
 
     return false;
 }

@@ -11,10 +11,10 @@ define( 'APP_PROJECTS_PATH', dirname( __FILE__, 3 ).'/' );
  * Wildcard DNS TLD.
  * What TLD should be used in the URLs?
  * Example: http://project.dev.10.10.10.11.[TLD]
- * Options: .xip.io, .nip.io
+ * Options: nip.io, sslip.io
  */
 
-define( 'APP_WILDCARD_DNS_TLD', '.nip.io' );
+define( 'APP_WILDCARD_DNS_TLD', 'nip.io' );
 
 /**
  * Extensions.
@@ -22,9 +22,9 @@ define( 'APP_WILDCARD_DNS_TLD', '.nip.io' );
  * Example: http://project.[EXT].10.10.10.11.nip.io
  */
 
-define( 'APP_EXT', '.dev' );
-define( 'APP_EXT_WP', '.dev' );
-define( 'APP_EXT_LARAVEL', '.lar' );
+define( 'APP_EXT', 'dev' );
+define( 'APP_EXT_WP', 'dev' );
+define( 'APP_EXT_LARAVEL', 'lar' );
 
 /**
  * IP override.
@@ -43,4 +43,12 @@ define( 'APP_IP_OVERRIDE', false );
  */
 
 define( 'APP_IGNORE_PROJECTS', [] );
+
+/**
+ * SSL.
+ * Do your projects have SSL?
+ * Example: false | true
+ */
+
+define( 'APP_SSL', false );
 
