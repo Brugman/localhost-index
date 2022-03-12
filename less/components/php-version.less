@@ -1,0 +1,42 @@
+.php-version {
+    padding: 6px 10px 6px 12px;
+    z-index: 2;
+
+    display: flex;
+    gap: 12px;
+
+    position: fixed;
+    bottom: 0;
+    right: 0;
+
+    cursor: default;
+    clip-path: polygon(
+        6px 0%,
+        100% 0%,
+        100% 100%,
+        0% 100%
+    );
+
+    background-color: @color-grey-1;
+    color: fade( @color-white-1, 20% );
+    &:hover {
+        transition: color 0.2s ease-in-out 0s;
+        color: @color-highlight;
+        svg {
+            transition: fill 0.2s ease-in-out 0s;
+            fill: @color-highlight;
+        }
+    }
+
+    svg {
+        height: 20px;
+        fill: fade( @color-white-1, 20% );
+    }
+    .version {
+        line-height: 1;
+        .font-body;
+        letter-spacing: 2px;
+        font-size: 18px;
+    }
+}
+

@@ -58,3 +58,8 @@
 
 </div><!-- app -->
 
+<div class="php-version">
+    <?php display_icon( 'php-alt' ); ?>
+    <span class="version"><?=phpversion();?></span>
+</div><!-- php-version -->
+
