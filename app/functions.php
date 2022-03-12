@@ -135,7 +135,7 @@ function display_icon( $icon )
     $path = '../public_html/assets/images/'.$icon.'.svg';
 
     if ( file_exists( $path ) )
-        echo include $path;
+        include $path;
 }
 
 function display_project_type_icon( $type )
