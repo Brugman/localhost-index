@@ -11,8 +11,8 @@
     "postinstall": "npx gulp --env=prod"
   },
   "devDependencies": {
-    "@babel/core": "^7.19.0",
-    "@babel/preset-env": "^7.19.0",
+    "@babel/core": "^7.20.12",
+    "@babel/preset-env": "^7.20.2",
     "fancy-log": "^2.0.0",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^8.0.0",
@@ -28,6 +28,6 @@
     "gulp-rename": "^2.0.0",
     "gulp-sourcemaps": "^3.0.0",
     "gulp-uglify": "^3.0.2",
-    "minimist": "^1.2.6"
+    "minimist": "^1.2.7"
   }
 }
