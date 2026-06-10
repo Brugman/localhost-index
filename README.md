@@ -1,6 +1,6 @@
 # Localhost Index
 
-> Localhost Index is a replacement "index.php" for Laragon / WampServer / XAMPP users.
+> Localhost Index is a replacement "index.php" for Herd / Laragon / WampServer / XAMPP users.
 
 ![screenshot](/screenshot.png)
 
