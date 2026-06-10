@@ -6,7 +6,7 @@
   "license": "MIT",
   "author": "Tim Brugman (https://timbr.dev/)",
   "repository": "github:Brugman/localhost-index",
-  "private": "true",
+  "private": true,
   "scripts": {
     "postinstall": "npx gulp --env=prod"
   },
