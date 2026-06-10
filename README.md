@@ -33,11 +33,11 @@ Pull requests are welcome. Please try to match the current code formatting.
 
 ### Development installation
 
-1. `npm i`
+1. `pnpm i`
 
-### Build tools
+### Build assets
 
-1. `npx gulp --env=prod` (repeat)
+1. `pnpm build` (repeat)
 
 ## Author
 

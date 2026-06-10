@@ -8,7 +8,8 @@
   "repository": "github:Brugman/localhost-index",
   "private": true,
   "scripts": {
-    "postinstall": "npx gulp --env=prod"
+    "build": "gulp --env=prod",
+    "watch": "gulp watch"
   },
   "devDependencies": {
     "@babel/core": "^7.29.7",
