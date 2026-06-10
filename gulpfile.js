@@ -1,14 +1,14 @@
 /**
- * timbr.dev Gulp template.
+ * Medium Rare Gulp template.
  *
- * Template last updated: 2021-06-17.
- * File last updated:     2021-06-17.
+ * Template last updated: 2024-08-13.
+ * File last updated:     2026-06-10.
  */
 
 /**
  * Directories.
  */
-var dir = {
+const dir = {
     php: 'app',
     input: {
         js:   'js',
@@ -23,34 +23,35 @@ var dir = {
 /**
  * Packages.
  */
-var gulp         = require( 'gulp' );
-var autoprefixer = require( 'gulp-autoprefixer' );
-var cleancss     = require( 'gulp-clean-css' );
-var filter       = require( 'gulp-filter' );
-var gulpif       = require( 'gulp-if' );
-var livereload   = require( 'gulp-livereload' );
-var notify       = require( 'gulp-notify' );
-var plumber      = require( 'gulp-plumber' );
-var rename       = require( 'gulp-rename' );
-var sourcemaps   = require( 'gulp-sourcemaps' );
-var argv         = require( 'minimist' )( process.argv.slice( 2 ) );
-var log          = require( 'fancy-log' );
+import gulp         from 'gulp';
+import autoprefixer from 'gulp-autoprefixer';
+import cleancss     from '@sequencemedia/gulp-clean-css';
+import filter       from 'gulp-filter';
+import gulpif       from 'gulp-if';
+import livereload   from 'gulp-livereload';
+import notify       from 'gulp-notify';
+import plumber      from 'gulp-plumber';
+import rename       from 'gulp-rename';
+import sourcemaps   from 'gulp-sourcemaps';
+import argv         from 'minimist';
+import log          from 'fancy-log';
 // js
-var concat       = require( 'gulp-concat' );
-var uglify       = require( 'gulp-uglify' );
-var babel        = require( 'gulp-babel' );
+import concat       from 'gulp-concat';
+import uglify       from 'gulp-uglify';
+import babel        from 'gulp-babel';
 // less
-var less         = require( 'gulp-less' );
+import less         from 'gulp-less';
 
 /**
  * Environment.
  */
-var env = ( argv.env ? argv.env : 'dev' );
+const argw = argv( process.argv.slice(2) );
+const env = ( argw.env ? argw.env : 'dev' );
 
 /**
  * Config.
  */
-var config = {
+const config = {
     run_sourcemaps:   ( env == 'dev' ? true : false ),
     run_minification: ( env == 'dev' ? false : true ),
 };
@@ -68,7 +69,7 @@ console.log( '' );
 /**
  * Error handlers.
  */
-var onErrorJS = function ( err ) {
+const onErrorJS = function ( err ) {
     log( '----------------' );
     log( 'JS has an error!' );
     log( '----------------' );
@@ -84,7 +85,7 @@ var onErrorJS = function ( err ) {
     this.emit('end');
 };
 
-var onErrorLess = function ( err ) {
+const onErrorLess = function ( err ) {
     log( '------------------' );
     log( 'Less has an error!' );
     log( '------------------' );
@@ -103,11 +104,11 @@ var onErrorLess = function ( err ) {
 /**
  * Procedures.
  */
-var app = [];
+const app = [];
 
 app.processJS = function ( args ) {
     // use all the files
-    return gulp.src( args.inputFiles )
+    return gulp.src( args.inputFiles, { allowEmpty: true } )
         // catch errors
         .pipe( plumber( { errorHandler: onErrorJS } ) )
         // start the sourcemap
@@ -130,7 +131,7 @@ app.processJS = function ( args ) {
 
 app.processLess = function ( args ) {
     // use all the files
-    return gulp.src( args.inputFiles )
+    return gulp.src( args.inputFiles, { allowEmpty: true } )
         // catch errors
         .pipe( plumber( { errorHandler: onErrorLess } ) )
         // start the sourcemap
