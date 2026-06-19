@@ -9,9 +9,9 @@ window.addEventListener( 'load', function () {
         var j = 0;
 
         while ( i < query.length && j < text.length ) {
-            if ( query[i] === text[j] ) {
+            if ( query[i] === text[j] )
                 i++;
-            }
+
             j++;
         }
 
@@ -65,6 +65,7 @@ window.addEventListener( 'load', function () {
      */
 
     var links = document.querySelectorAll('a');
+
     links.forEach( function ( link ) {
         link.addEventListener( 'click', function ( event ) {
             document.getElementById('q').focus();
@@ -87,9 +88,8 @@ window.addEventListener( 'load', function () {
                 if ( projects_old ) {
                     let removed = projects_old.filter( project => !projects_new.includes( project ) );
                     let added = projects_new.filter( project => !projects_old.includes( project ) );
-                    if ( added.length != 0 || removed.length != 0 ) {
+                    if ( added.length != 0 || removed.length != 0 )
                         location.reload();
-                    }
                 }
                 projects_old = projects_new;
             })
