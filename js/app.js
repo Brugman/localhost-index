@@ -1,4 +1,4 @@
-window.addEventListener('load', function () {
+window.addEventListener( 'load', function () {
 
     /**
      * Functions.
@@ -19,7 +19,7 @@ window.addEventListener('load', function () {
     };
 
     var filter_project_list = function () {
-        var query = this.value.toLowerCase().replace(/\s+/g, '');
+        var query = this.value.toLowerCase().replace( /\s+/g, '' );
         var projects = document.querySelectorAll('.project');
 
         projects.forEach( function ( project ) {
@@ -50,10 +50,10 @@ window.addEventListener('load', function () {
 
     var links = document.querySelectorAll('a');
     links.forEach( function ( link ) {
-        link.addEventListener('click', function ( event ) {
+        link.addEventListener( 'click', function ( event ) {
             document.getElementById('q').focus();
         });
-        link.addEventListener('mouseup', function ( event ) {
+        link.addEventListener( 'mouseup', function ( event ) {
             document.getElementById('q').focus();
         });
     });
@@ -66,17 +66,17 @@ window.addEventListener('load', function () {
 
     setInterval( function () {
         fetch( '/json/project-list.php' )
-        .then( res => res.json() )
-        .then( projects_new => {
-            if ( projects_old ) {
-                let removed = projects_old.filter( project => !projects_new.includes( project ) );
-                let added = projects_new.filter( project => !projects_old.includes( project ) );
-                if ( added.length != 0 || removed.length != 0 ) {
-                    location.reload();
+            .then( res => res.json() )
+            .then( projects_new => {
+                if ( projects_old ) {
+                    let removed = projects_old.filter( project => !projects_new.includes( project ) );
+                    let added = projects_new.filter( project => !projects_old.includes( project ) );
+                    if ( added.length != 0 || removed.length != 0 ) {
+                        location.reload();
+                    }
                 }
-            }
-            projects_old = projects_new;
-        })
+                projects_old = projects_new;
+            })
     }, 5000 );
 
     /**
