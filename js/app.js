@@ -66,15 +66,9 @@ window.addEventListener( 'load', function () {
      * On link click: Focus search.
      */
 
-    const links = document.querySelectorAll('a');
-
-    links.forEach( function ( link ) {
-        link.addEventListener( 'click', function ( event ) {
+    document.addEventListener( 'click', function ( event ) {
+        if ( event.target.closest('a') )
             searchInput.focus();
-        });
-        link.addEventListener( 'mouseup', function ( event ) {
-            searchInput.focus();
-        });
     });
 
     /**
