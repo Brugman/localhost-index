@@ -30,6 +30,18 @@ window.addEventListener( 'load', function () {
         });
     };
 
+    var open_top_visible_project = function () {
+        var top_project = document.querySelector('.project:not([style*="display: none"])');
+
+        if ( !top_project )
+            return;
+
+        var link = top_project.querySelector('.icon.frontend a');
+
+        if ( link && link.href )
+            window.location.href = link.href;
+    };
+
     /**
      * On load: Focus search.
      */
@@ -41,8 +53,12 @@ window.addEventListener( 'load', function () {
      * On query change: Search query.
      */
 
-    document.getElementById('q').addEventListener( 'keyup', filter_project_list );
     document.getElementById('q').addEventListener( 'change', filter_project_list );
+    document.getElementById('q').addEventListener( 'keyup', filter_project_list );
+    document.getElementById('q').addEventListener( 'keydown', function ( event ) {
+        if ( event.key === 'Enter' )
+            open_top_visible_project();
+    });
 
     /**
      * On link click: Focus search.
