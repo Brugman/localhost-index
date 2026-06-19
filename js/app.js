@@ -4,17 +4,31 @@ window.addEventListener('load', function () {
      * Functions.
      */
 
+    var is_subsequence = function ( query, text ) {
+        var i = 0;
+        var j = 0;
+
+        while ( i < query.length && j < text.length ) {
+            if ( query[i] === text[j] ) {
+                i++;
+            }
+            j++;
+        }
+
+        return i === query.length;
+    };
+
     var filter_project_list = function () {
-        var query = this.value.toLowerCase();
+        var query = this.value.toLowerCase().replace(/\s+/g, '');
         var projects = document.querySelectorAll('.project');
+
         projects.forEach( function ( project ) {
-            if ( query != '' ) {
-                project.style.display = project.querySelector('.name').textContent.toLowerCase().indexOf( query ) > -1 ? 'grid' : 'none';
-            } else {
-                project.style.display = 'grid';
-            };
+            var name = project.querySelector('.name').textContent.toLowerCase();
+            var matches = query === '' || name.indexOf( query ) > -1 || is_subsequence( query, name );
+
+            project.style.display = matches ? 'grid' : 'none';
         });
-    }
+    };
 
     /**
      * On load: Focus search.
