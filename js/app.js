@@ -46,16 +46,18 @@ window.addEventListener( 'load', function () {
      * On load: Focus search.
      */
 
-    document.getElementById('q').focus();
-    document.getElementById('q').select();
+    const searchInput = document.getElementById('q');
+
+    searchInput.focus();
+    searchInput.select();
 
     /**
      * On query change: Search query.
      */
 
-    document.getElementById('q').addEventListener( 'change', filter_project_list );
-    document.getElementById('q').addEventListener( 'keyup', filter_project_list );
-    document.getElementById('q').addEventListener( 'keydown', function ( event ) {
+    searchInput.addEventListener( 'change', filter_project_list );
+    searchInput.addEventListener( 'keyup', filter_project_list );
+    searchInput.addEventListener( 'keydown', function ( event ) {
         if ( event.key === 'Enter' )
             open_top_visible_project();
     });
@@ -68,10 +70,10 @@ window.addEventListener( 'load', function () {
 
     links.forEach( function ( link ) {
         link.addEventListener( 'click', function ( event ) {
-            document.getElementById('q').focus();
+            searchInput.focus();
         });
         link.addEventListener( 'mouseup', function ( event ) {
-            document.getElementById('q').focus();
+            searchInput.focus();
         });
     });
 
@@ -88,7 +90,7 @@ window.addEventListener( 'load', function () {
                 if ( projects_old ) {
                     const removed = projects_old.filter( project => !projects_new.includes( project ) );
                     const added = projects_new.filter( project => !projects_old.includes( project ) );
-                    if ( added.length != 0 || removed.length != 0 )
+                    if ( added.length !== 0 || removed.length !== 0 )
                         location.reload();
                 }
                 projects_old = projects_new;
@@ -102,8 +104,8 @@ window.addEventListener( 'load', function () {
     const searchParams = new URLSearchParams( window.location.search );
 
     if ( searchParams.has('q') ) {
-        document.getElementById('q').value = searchParams.get('q');
-        filter_project_list.call( document.getElementById('q') );
+        searchInput.value = searchParams.get('q');
+        filter_project_list.call( searchInput );
     }
 
 });
