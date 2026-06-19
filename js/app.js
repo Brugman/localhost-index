@@ -1,10 +1,10 @@
-window.addEventListener( 'load', function () {
+window.addEventListener( 'load', () => {
 
     /**
      * Functions.
      */
 
-    const is_subsequence = function ( query, text ) {
+    const is_subsequence = ( query, text ) => {
         let i = 0;
         let j = 0;
 
@@ -22,15 +22,15 @@ window.addEventListener( 'load', function () {
         const query = this.value.toLowerCase().replace( /\s+/g, '' );
         const projects = document.querySelectorAll('.project');
 
-        projects.forEach( function ( project ) {
+        projects.forEach( project => {
             const name = project.querySelector('.name').textContent.toLowerCase();
-            const matches = query === '' || name.indexOf( query ) > -1 || is_subsequence( query, name );
+            const matches = query === '' || name.includes( query ) || is_subsequence( query, name );
 
             project.style.display = matches ? 'grid' : 'none';
         });
     };
 
-    const open_top_visible_project = function () {
+    const open_top_visible_project = () => {
         const top_project = document.querySelector('.project:not([style*="display: none"])');
 
         if ( !top_project )
@@ -57,7 +57,7 @@ window.addEventListener( 'load', function () {
 
     searchInput.addEventListener( 'change', filter_project_list );
     searchInput.addEventListener( 'keyup', filter_project_list );
-    searchInput.addEventListener( 'keydown', function ( event ) {
+    searchInput.addEventListener( 'keydown', event => {
         if ( event.key === 'Enter' )
             open_top_visible_project();
     });
@@ -66,7 +66,7 @@ window.addEventListener( 'load', function () {
      * On link click: Focus search.
      */
 
-    document.addEventListener( 'click', function ( event ) {
+    document.addEventListener( 'click', event => {
         if ( event.target.closest('a') )
             searchInput.focus();
     });
@@ -77,7 +77,7 @@ window.addEventListener( 'load', function () {
 
     let projects_old = false;
 
-    setInterval( function () {
+    setInterval( () => {
         fetch( '/json/project-list.php' )
             .then( res => res.json() )
             .then( projects_new => {
