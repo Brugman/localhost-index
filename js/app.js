@@ -4,9 +4,9 @@ window.addEventListener( 'load', function () {
      * Functions.
      */
 
-    var is_subsequence = function ( query, text ) {
-        var i = 0;
-        var j = 0;
+    const is_subsequence = function ( query, text ) {
+        let i = 0;
+        let j = 0;
 
         while ( i < query.length && j < text.length ) {
             if ( query[i] === text[j] )
@@ -18,25 +18,25 @@ window.addEventListener( 'load', function () {
         return i === query.length;
     };
 
-    var filter_project_list = function () {
-        var query = this.value.toLowerCase().replace( /\s+/g, '' );
-        var projects = document.querySelectorAll('.project');
+    const filter_project_list = function () {
+        const query = this.value.toLowerCase().replace( /\s+/g, '' );
+        const projects = document.querySelectorAll('.project');
 
         projects.forEach( function ( project ) {
-            var name = project.querySelector('.name').textContent.toLowerCase();
-            var matches = query === '' || name.indexOf( query ) > -1 || is_subsequence( query, name );
+            const name = project.querySelector('.name').textContent.toLowerCase();
+            const matches = query === '' || name.indexOf( query ) > -1 || is_subsequence( query, name );
 
             project.style.display = matches ? 'grid' : 'none';
         });
     };
 
-    var open_top_visible_project = function () {
-        var top_project = document.querySelector('.project:not([style*="display: none"])');
+    const open_top_visible_project = function () {
+        const top_project = document.querySelector('.project:not([style*="display: none"])');
 
         if ( !top_project )
             return;
 
-        var link = top_project.querySelector('.icon.frontend a');
+        const link = top_project.querySelector('.icon.frontend a');
 
         if ( link && link.href )
             window.location.href = link.href;
@@ -64,7 +64,7 @@ window.addEventListener( 'load', function () {
      * On link click: Focus search.
      */
 
-    var links = document.querySelectorAll('a');
+    const links = document.querySelectorAll('a');
 
     links.forEach( function ( link ) {
         link.addEventListener( 'click', function ( event ) {
@@ -79,15 +79,15 @@ window.addEventListener( 'load', function () {
      * Detect changes in the project dir.
      */
 
-    var projects_old = false;
+    let projects_old = false;
 
     setInterval( function () {
         fetch( '/json/project-list.php' )
             .then( res => res.json() )
             .then( projects_new => {
                 if ( projects_old ) {
-                    let removed = projects_old.filter( project => !projects_new.includes( project ) );
-                    let added = projects_new.filter( project => !projects_old.includes( project ) );
+                    const removed = projects_old.filter( project => !projects_new.includes( project ) );
+                    const added = projects_new.filter( project => !projects_old.includes( project ) );
                     if ( added.length != 0 || removed.length != 0 )
                         location.reload();
                 }
@@ -99,7 +99,7 @@ window.addEventListener( 'load', function () {
      * Filter by URL (/?q=example).
      */
 
-    let searchParams = new URLSearchParams( window.location.search );
+    const searchParams = new URLSearchParams( window.location.search );
 
     if ( searchParams.has('q') ) {
         document.getElementById('q').value = searchParams.get('q');
